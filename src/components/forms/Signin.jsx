@@ -58,7 +58,7 @@ function Signin({ isOpen, onClose, openSignup }) {
 
                 <div className="text-center">
                     <Button
-                        text={"Submit"}
+                        text={"Signin"}
                         color={darkBlue}
                         hoverColor={lightBlue}
                         textColor={"white"}

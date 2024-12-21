@@ -5,6 +5,7 @@ import { FiBookOpen } from "react-icons/fi";
 import { MdFileDownloadDone } from "react-icons/md";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import getMonth from "./helper/getMonth";
+import { darkBlue, green, purple } from "./colors";
 
 function App() {
     const month = getMonth();
@@ -21,21 +22,21 @@ function App() {
                         <ReadingSummaryCard
                             Icon={FiBookOpen}
                             iconsSize={30}
-                            color={"#60a5fa"}
+                            color={darkBlue}
                             cardHeading={"Currently Reading"}
                             cardSubtext={1}
                         />
                         <ReadingSummaryCard
                             Icon={MdFileDownloadDone}
                             iconsSize={30}
-                            color={"#16a34a"}
+                            color={green}
                             cardHeading={"Total Completed"}
                             cardSubtext={3}
                         />
                         <ReadingSummaryCard
                             Icon={FaArrowTrendUp}
                             iconsSize={30}
-                            color={"#9333ea"}
+                            color={purple}
                             cardHeading={`${month} Progress`}
                             cardSubtext={"0 books"}
                         />

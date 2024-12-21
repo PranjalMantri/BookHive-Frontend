@@ -6,14 +6,27 @@ import { MdFileDownloadDone } from "react-icons/md";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import getMonth from "./helper/getMonth";
 import { darkBlue, green, purple } from "./colors";
-import Modal from "./components/Modal";
 import Signup from "./components/forms/Signup";
+import Signin from "./components/forms/Signin";
 
 function App() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSignupOpen, setSignupOpen] = useState(false);
+    const [isSigninOpen, setSigninOpen] = useState(false);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const openSignup = () => {
+        setSignupOpen(true);
+        setSigninOpen(false);
+    };
+
+    const openSignin = () => {
+        setSigninOpen(true);
+        setSignupOpen(false);
+    };
+
+    const closeModals = () => {
+        setSignupOpen(false);
+        setSigninOpen(false);
+    };
 
     const month = getMonth();
 
@@ -21,11 +34,12 @@ function App() {
         <>
             <div className="h-screen w-full bg-gray-100">
                 <div>
-                    <Navbar onClick={openModal} />
+                    <Navbar onClick={openSignup} />
                 </div>
                 <div className="py-12 w-[80%] mx-[10%]">
                     <div className="py-4 text-2xl font-semibold">Reading Summary</div>
-                    {isModalOpen && <Signup isOpen={isModalOpen} onClose={closeModal} />}
+                    {isSignupOpen && <Signup isOpen={isSignupOpen} onClose={closeModals} openSignIn={openSignin} />}
+                    {isSigninOpen && <Signin isOpen={isSigninOpen} onClose={closeModals} openSignup={openSignup} />}
 
                     <div className="flex flex-row gap-4">
                         <ReadingSummaryCard

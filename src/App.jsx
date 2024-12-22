@@ -11,11 +11,46 @@ import Signup from "./components/forms/Signup";
 import Signin from "./components/forms/Signin";
 import Button from "./components/Button";
 import AddBook from "./components/forms/AddBook";
+import BookCard from "./components/BookCard";
 
 function App() {
     const [isSignupOpen, setSignupOpen] = useState(false);
     const [isSigninOpen, setSigninOpen] = useState(false);
     const [isAddBookOpen, setAddBookOpen] = useState(false);
+
+    const books = [
+        {
+            id: "1",
+            title: "The Midnight Library",
+            author: "Matt Haig",
+            coverUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800",
+            totalPages: 304,
+            currentPage: 150,
+            status: "reading",
+            startDate: "2024-03-10",
+        },
+        {
+            id: "2",
+            title: "Project Hail Mary",
+            author: "Andy Weir",
+            coverUrl: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=800",
+            totalPages: 496,
+            currentPage: 496,
+            status: "completed",
+            startDate: "2024-02-15",
+            completedDate: "2024-03-01",
+        },
+        {
+            id: "3",
+            title: "Dune",
+            author: "Frank Herbert",
+            coverUrl: "https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&q=80&w=800",
+            totalPages: 688,
+            currentPage: 0,
+            status: "want-to-read",
+            startDate: "2024-03-15",
+        },
+    ];
 
     const openSignup = () => {
         setSignupOpen(true);
@@ -76,7 +111,7 @@ function App() {
                             iconsSize={30}
                             color={green}
                             cardHeading={"Total Completed"}
-                            cardSubtext={3}
+                            cardSubtext={1}
                         />
                         <ReadingSummaryCard
                             Icon={FaArrowTrendUp}
@@ -85,6 +120,41 @@ function App() {
                             cardHeading={`${month} Progress`}
                             cardSubtext={"0 books"}
                         />
+                    </div>
+
+                    <div className="space-y-8 mt-8">
+                        <section>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Currently Reading</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {books
+                                    .filter((book) => book.status === "reading")
+                                    .map((book) => (
+                                        <BookCard key={book.id} book={book} />
+                                    ))}
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Want to read</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {books
+                                    .filter((book) => book.status === "want-to-read")
+                                    .map((book) => (
+                                        <BookCard key={book.id} book={book} />
+                                    ))}
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Completed</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {books
+                                    .filter((book) => book.status === "completed")
+                                    .map((book) => (
+                                        <BookCard key={book.id} book={book} />
+                                    ))}
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
